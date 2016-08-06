@@ -17,10 +17,7 @@
         android:id="@+id/textView"
         android:textColor="#3c8727"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="47dp"
-        android:layout_marginStart="47dp" />
+        android:layout_centerHorizontal="true" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
