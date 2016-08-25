@@ -4,6 +4,7 @@ import android.Manifest;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,7 +25,9 @@ import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import com.kakao.KakaoLink;
+import com.kakao.KakaoParameterException;
+import com.kakao.KakaoTalkLinkMessageBuilder;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,9 +36,14 @@ public class MainActivity extends AppCompatActivity {
     private Button gps_btn;
     private TextView gps_txt;
 
-    MongoClientURI uri = new MongoClientURI( "127.0.0.1:27017/woox" );
+
+    private KakaoLink kakaoLink;
+    private KakaoTalkLinkMessageBuilder kakaoTalkLinkMessageBuilder;
+
+
+/*    MongoClientURI uri = new MongoClientURI( "127.0.0.1:27017/woox" );
     MongoClient mongoClient = new MongoClient(uri);
-    MongoDatabase db = mongoClient.getDatabase(uri.getDatabase());
+    MongoDatabase db = mongoClient.getDatabase(uri.getDatabase());*/
 
 //    MongoCollection<Document> collection = db.getCollection("mycoll");
 //
@@ -56,6 +64,18 @@ public class MainActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        try {
+            kakaoLink = KakaoLink.getKakaoLink(getApplicationContext());
+            kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
+            kakaoTalkLinkMessageBuilder.addText("test");
+            kakaoLink.sendMessage(kakaoTalkLinkMessageBuilder.build(), this);
+            kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
+        } catch (KakaoParameterException e) {
+            Log.e("error",e.getMessage());
+        }
+
         //commit test Kwook
         AppEventsLogger.activateApp(this);
 
