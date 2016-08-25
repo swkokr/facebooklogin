@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         gps_btn = (Button) findViewById(R.id.gps_btn);
         gps_txt = (TextView) findViewById(R.id.gps_txt);
 
-
+        //안드로이드 6.0 부터 메인에서도 퍼미션을 받아와야지만 된다. 위험성 때문인듯
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         // GPS 정보를 보여주기 위한 이벤트 클래스 등록
         gps_btn.setOnClickListener(new View.OnClickListener() {
